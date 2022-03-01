@@ -5,10 +5,10 @@ default: &default
 set: &set
   animals:
     <<: *default
-    url: <%= URI.parse(ENV['DATABASE_URL_ANIMALS']) %>
+    url: <%= URI.parse(ENV['DATABASE_URL_ANIMALS']).tap { |uri| uri.password = ENV['DATABASE_PASSWORD_RW'] }.to_s %>
   animals_replica:
     <<: *default
-    url: <%= URI.parse(ENV['DATABASE_URL_ANIMALS_REPLICA']) %>
+    url: <%= URI.parse(ENV['DATABASE_URL_ANIMALS_REPLICA']).tap { |uri| uri.password = ENV['DATABASE_PASSWORD_RO'] }.to_s  %>
     replica: true
 
 
