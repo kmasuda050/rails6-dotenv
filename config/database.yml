@@ -17,16 +17,27 @@ default: &default
   password:
   socket: /var/run/mysqld/mysqld.sock
 
+# https://guides.rubyonrails.org/active_record_multiple_databases.html
 development:
-  <<: *default
-  database: rails6_dotenv_development
+  animals:
+    <<: *default
+    database: rails6_dotenv_development
+  animals_replica:
+    <<: *default
+    database: rails6_dotenv_development
+    replica: true
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: rails6_dotenv_test
+  animals:
+    <<: *default
+    database: rails6_dotenv_test
+  animals_replica:
+    <<: *default
+    database: rails6_dotenv_test
+    replica: true
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
